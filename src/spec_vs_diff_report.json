@@ -1,0 +1,188 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-15T10:33:32.116Z",
+  "summary": "Diff adds a new Motoko backend actor with in-memory Maps and some core entity types (brands, campaigns, tasks, user profiles) plus a new React app shell with authenticated routing, navigation, and initial UI components for sign-in, profile setup, brands, marketing campaigns, and tasks. Many requested MVP modules (dashboard KPIs/charts, CRO, products/SKUs, operations, reports/PDF export, knowledge base, decision assistant) are not evidenced in the provided diff summary, and stable persistence is not shown.",
+  "missing_requirements": [
+    {
+      "id": "REQ-2",
+      "requirement": "Implement RBAC with Admin/Editor/Viewer, backend-enforced permissions for all write operations, and an Admin UI to assign roles to principals (changes take effect without redeploy).",
+      "reason": "Diff shows some authorization mixin usage in backend and a RequireRole component in frontend, but does not provide evidence of: (1) explicit Admin/Editor/Viewer role model end-to-end, (2) permission checks applied to all write operations (brand/campaign/task CRUD), or (3) an implemented Admin role assignment UI/page (only a route reference is shown).",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/components/auth/RequireRole.tsx",
+        "frontend/src/App.tsx"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "requirement": "Brand Management CRUD with key fields (products/pricing/margins/suppliers/ad budget and weekly/monthly goals), list + detail pages, RBAC, and persistent storage.",
+      "reason": "Brand create/edit dialogs exist, and a brand detail route exists, but there is no evidence of full CRUD including archive/delete, suppliers/products/pricing management UI, or persistence in stable storage (backend uses Map.empty without stable storage evidence).",
+      "evidence": [
+        "frontend/src/components/brands/BrandDialog.tsx",
+        "frontend/src/components/brands/BrandEditDialog.tsx",
+        "frontend/src/App.tsx",
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "requirement": "Performance Dashboard with per-brand and cross-brand KPI time-series charts and weekly/monthly period switching, with guidance empty states.",
+      "reason": "Dashboard route exists, but no dashboard KPI computation, stored time-series model, charts, brand selector, or weekly/monthly toggle is evidenced in the diff summary.",
+      "evidence": [
+        "frontend/src/App.tsx"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "requirement": "Marketing Manager: log campaign performance tied to a brand; compare campaigns with sortable columns; underperformer highlighting based on configurable thresholds in Settings; creatives/copies as structured text plus optional URLs.",
+      "reason": "Campaign table supports sorting and highlights underperformers, but underperformance threshold is hardcoded (roas < 2.0) rather than configured in Settings; campaign create dialog does not show creatives/copies structured text; and there is no evidence campaigns are tied to a brand in the UI or backend API usage shown.",
+      "evidence": [
+        "frontend/src/components/marketing/CampaignDialog.tsx",
+        "frontend/src/components/marketing/CampaignTable.tsx",
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "requirement": "Website & CRO module: per-brand optimization checklist, A/B test tracker with statuses, and searchable UX feedback notes with timestamps.",
+      "reason": "CRO route exists but no checklist/A-B test/UX notes data model, CRUD UI, filtering, or search is evidenced in the diff summary.",
+      "evidence": [
+        "frontend/src/App.tsx"
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "requirement": "Product & Category Manager: SKU tracking per brand (including inventory), top/low performers view, and inventory alerts based on configurable thresholds.",
+      "reason": "Products route exists but no SKU/inventory entities, CRUD UI, performer calculations, or threshold-based alerts are evidenced in the diff summary; backend Product type shown lacks inventory field.",
+      "evidence": [
+        "frontend/src/App.tsx",
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "requirement": "Operations & Shipping: shipping partners, delivery times, RTO rate, cost per shipment, period logging with trends, and ops issues log with filtering.",
+      "reason": "Operations route exists but no operations/shipping data model, CRUD UI, trend views, or issues log is evidenced in the diff summary.",
+      "evidence": [
+        "frontend/src/App.tsx",
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "requirement": "Decision & Strategy Assistant: deterministic rule-based recommendations + weekly action plan generation and saving, based on configured thresholds and heuristics, with explanations and links to underlying data.",
+      "reason": "No recommendation/assistant logic, data structures, endpoints, or UI is evidenced in the diff summary.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/App.tsx"
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "requirement": "Reports: weekly/monthly report views per brand and cross-brand, with charts and PDF export from frontend.",
+      "reason": "Reports route exists but no report generation UI, date range selection, chart rendering, or PDF export implementation is evidenced in the diff summary.",
+      "evidence": [
+        "frontend/src/App.tsx"
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "requirement": "Task & Workflow Manager: tasks with priority/due dates, filters, collaboration notes, and in-app reminders/indicators for due/overdue.",
+      "reason": "Task creation and completion toggle are evidenced, and overdue styling exists, but there is no evidence of task filtering UI, collaboration notes, or any in-app reminder indicator system beyond visual overdue border.",
+      "evidence": [
+        "frontend/src/components/tasks/TaskDialog.tsx",
+        "frontend/src/components/tasks/TaskList.tsx",
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "requirement": "Knowledge repository with categories, searchable entries (title/body), rich text formatting, attachments as links, persistence and RBAC scoping.",
+      "reason": "Knowledge route exists but no knowledge data model, CRUD UI, search, rich text, or RBAC-scoped persistence is evidenced in the diff summary.",
+      "evidence": [
+        "frontend/src/App.tsx",
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-14",
+      "requirement": "Commit project documentation: architecture, UI flow, Motoko data model/storage layout, and phased MVP roadmap with deferred items called out.",
+      "reason": "No documentation files are evidenced in the diff summary.",
+      "evidence": []
+    },
+    {
+      "id": "REQ-15",
+      "requirement": "Cohesive clean visual theme (not blue/purple), neutral analytics palette, consistent typography/layout for tables/metrics/charts, accessibility on mobile.",
+      "reason": "Some shared components and Tailwind classes exist, but there is no evidence of a defined non-blue/purple theme/palette, typography scale definition, or chart styling across main pages in the diff summary.",
+      "evidence": [
+        "frontend/src/components/MetricCard.tsx",
+        "frontend/src/components/PageHeader.tsx",
+        "frontend/src/components/layout/AppShell.tsx"
+      ]
+    },
+    {
+      "requirement": "Persist data in canister stable storage (no external DB).",
+      "reason": "Backend storage is shown as in-memory Maps (Map.empty) and counters as vars; no stable variables or stable memory serialization/upgrade strategy is evidenced in the diff summary, so persistence across upgrades/restarts is not demonstrated.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Secret URL parameter-based access control initialization (caffeineAdminToken) and calling a backend _initializeAccessControlWithSecret method from the frontend actor hook.",
+      "reason": "BuildRequest does not request any secret-token bootstrap mechanism via URL parameters; authentication should be Internet Identity only, and RBAC role assignment should be done via Admin UI, not a hidden URL token flow.",
+      "evidence": [
+        "frontend/src/hooks/useActor.ts"
+      ]
+    }
+  ],
+  "confidence": 0.74,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/EmptyState.tsx",
+    "frontend/src/components/MetricCard.tsx",
+    "frontend/src/components/PageHeader.tsx",
+    "frontend/src/components/auth/AuthGate.tsx",
+    "frontend/src/components/auth/ProfileSetupModal.tsx",
+    "frontend/src/components/auth/RequireRole.tsx",
+    "frontend/src/components/auth/SignInScreen.tsx",
+    "frontend/src/components/brands/BrandDialog.tsx",
+    "frontend/src/components/brands/BrandEditDialog.tsx",
+    "frontend/src/components/layout/AppShell.tsx",
+    "frontend/src/components/layout/NavItems.ts",
+    "frontend/src/components/marketing/CampaignDialog.tsx",
+    "frontend/src/components/marketing/CampaignTable.tsx",
+    "frontend/src/components/tasks/TaskDialog.tsx",
+    "frontend/src/components/tasks/TaskList.tsx",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useCurrentUserProfile.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/hooks/useUserRole.ts",
+    "frontend/src/index.css",
+    "frontend/src/lib/utils.ts",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/BrandsPage.tsx",
+    "frontend/src/pages/CROPage.tsx",
+    "frontend/src/pages/DashboardPage.tsx",
+    "frontend/src/pages/KnowledgePage.tsx",
+    "frontend/src/pages/MarketingPage.tsx",
+    "frontend/src/pages/OperationsPage.tsx",
+    "frontend/src/pages/ProductsPage.tsx",
+    "frontend/src/pages/ReportsPage.tsx",
+    "frontend/src/pages/SettingsPage.tsx",
+    "frontend/src/pages/TasksPage.tsx",
+    "frontend/src/pages/brands/BrandDetailPage.tsx",
+    "frontend/src/pages/settings/AccessControlPage.tsx",
+    "frontend/src/utils/urlParams.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

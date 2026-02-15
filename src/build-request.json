@@ -1,0 +1,313 @@
+{
+  "kind": "build_request",
+  "title": "Centralized Growth Management App for multi-brand D2C operations (MVP + architecture/docs)",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Implement secure login using Internet Identity and gate all app pages behind authentication.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Technical Requirements:\nSimple, clean UI\nMobile-friendly\nCloud-based\nSecure login\nRole-based access"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Unauthenticated users are redirected to a sign-in screen and cannot access app pages.",
+        "Authenticated users can sign out.",
+        "User-facing text is in English."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement role-based access control (RBAC) with at least three roles (Admin, Editor, Viewer) and a basic UI for Admins to assign roles to principals.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Role-based access"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend enforces permissions for all write operations (e.g., create/update/delete).",
+        "Frontend hides/disabled restricted actions based on role.",
+        "Admin can assign/change a user’s role and changes take effect without redeploy."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Create the MVP information architecture and UI navigation: a responsive app shell with sidebar (desktop) / bottom navigation or drawer (mobile) and routes for Brands, Dashboard, Marketing, CRO, Products, Operations, Tasks, Reports, Knowledge, and Settings.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "The app should act as my personal Growth & Business Dashboard with the following features: ..."
+        ]
+      },
+      "acceptanceCriteria": [
+        "All listed sections are reachable via navigation.",
+        "Layout is mobile-friendly and usable on narrow screens.",
+        "Each section has a clear empty state when no data exists."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Brand Management: implement CRUD for brand profiles, including key fields for products/pricing/margins/suppliers/ad budget and weekly/monthly goals, with list + detail pages.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "1️⃣ Brand Management\nCreate profiles for each D2C brand\nStore key details: products, pricing, margins, suppliers, ads budget\nTrack monthly/weekly goals"
+        ]
+      },
+      "acceptanceCriteria": [
+        "User can create, view, edit, and archive/delete a brand (subject to RBAC).",
+        "Brand detail shows stored key details and goals.",
+        "Data persists across refresh/reload."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Performance Dashboard: provide a per-brand and cross-brand dashboard showing KPIs (Revenue, Profit, ROAS, CAC, Conversion rate, AOV, Return rate, Shipping cost) with time-series charts and basic trends over selectable periods (weekly/monthly).",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "2️⃣ Performance Dashboard\nShow KPIs:\nRevenue\nProfit\nROAS\nCAC\nConversion rate\nAOV\nReturn rate\nShipping cost\nVisual charts and trends"
+        ]
+      },
+      "acceptanceCriteria": [
+        "User can select a brand or view an aggregated overview across brands.",
+        "At least one chart per KPI category renders from stored data.",
+        "User can switch between weekly and monthly views.",
+        "If data is missing, UI explains what to add and where."
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Marketing Manager (MVP): implement a module to manually log and review Meta/Google campaign performance (campaign name, platform, spend, revenue, ROAS, dates), compare campaigns, flag underperformers based on configurable thresholds, and store associated creatives/copies as text entries and file links.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "3️⃣ Marketing Manager\nTrack Meta Ads & Google Ads performance\nCompare campaigns\nSuggest budget allocation\nHighlight underperforming ads\nStore creatives and copies"
+        ]
+      },
+      "acceptanceCriteria": [
+        "User can create/edit campaign performance entries tied to a brand.",
+        "User can compare campaigns in a table with sortable columns (at minimum: spend, revenue, ROAS).",
+        "Underperforming campaigns are highlighted when they breach thresholds set in Settings.",
+        "Creatives/copies can be stored as structured text (e.g., headline/body) plus optional URL references."
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Website & CRO Module (MVP): implement a website optimization checklist per brand, an A/B test tracker (hypothesis, variants, dates, result), and a UX feedback notes log.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "4️⃣ Website & CRO Module\nChecklist for website optimization\nConversion improvement suggestions\nA/B test tracker\nUX feedback notes"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Checklist items can be created, checked/unchecked, and filtered by status.",
+        "A/B tests can be created and tracked through statuses (planned/running/completed).",
+        "UX feedback notes support timestamps and are searchable within a brand."
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Product & Category Manager (MVP): implement SKU tracking per brand (SKU, category, price, cost, margin, inventory), identify best/low-performing SKUs from KPI inputs, and trigger inventory alerts using configurable thresholds.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "5️⃣ Product & Category Manager\nTrack best-selling and low-performing SKUs\nInventory alerts\nPricing optimization suggestions\nProduct profitability analysis"
+        ]
+      },
+      "acceptanceCriteria": [
+        "User can create/edit SKU records per brand.",
+        "UI can display a “Top / Low performers” view based on stored sales/profitability fields.",
+        "Inventory alert state is shown when inventory <= threshold and can be filtered."
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Operations & Shipping (MVP): implement tracking for shipping partners, delivery times, RTO rate, cost per shipment, and an ops issues log per brand.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "6️⃣ Operations & Shipping\nTrack delivery time\nRTO rate\nShipping partners\nCost per shipment\nOps issues log"
+        ]
+      },
+      "acceptanceCriteria": [
+        "User can log shipping metrics per period and view trends/summary per brand.",
+        "Ops issues can be created, assigned a status, and filtered (open/closed).",
+        "Key metrics (delivery time, RTO, cost per shipment) appear on the brand’s operations page."
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "text": "Decision & Strategy Assistant (MVP, non-LLM): generate rule-based recommendations and a weekly action plan using the app’s stored KPI thresholds and heuristics (e.g., flag low ROAS, high CAC, low conversion rate) with explanations and links to the relevant underlying data.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "7️⃣ Decision & Strategy Assistant\nAI-powered recommendations like:\n“Increase ad budget for Brand A”\n“Reduce price of Product B”\n“Improve homepage CTA”\nWeekly action plan"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Recommendations are generated deterministically from configured rules (no external AI/LLM calls).",
+        "Each recommendation includes a reason (which KPI/threshold triggered it) and the brand/campaign/SKU it relates to.",
+        "Weekly action plan can be generated on demand and saved for later review."
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "text": "Reports & Presentations (MVP): implement weekly and monthly report generation per brand and cross-brand overview, with client-friendly layouts and export to PDF from the frontend.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "8️⃣ Reports & Presentations\nAuto-generate:\nWeekly reports\nMonthly reviews\nClient presentations\nExport to PDF / PPT"
+        ]
+      },
+      "acceptanceCriteria": [
+        "User can generate a Weekly and Monthly report view with key KPIs, charts, and notable changes.",
+        "User can export the report to a PDF file.",
+        "Exported PDF contains readable typography and includes date range + brand(s)."
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "text": "Task & Workflow Manager: implement daily to-do list with priority tagging, due dates, reminders (in-app), and collaboration notes attached to brands or tasks.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "9️⃣ Task & Workflow Manager\nDaily to-do list\nPriority tagging\nFollow-up reminders\nTeam collaboration notes"
+        ]
+      },
+      "acceptanceCriteria": [
+        "User can create/edit/complete tasks and filter by brand, status, due date, and priority.",
+        "Tasks support freeform notes and optional association to a brand.",
+        "Reminders appear as in-app indicators for due/overdue tasks."
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "text": "Learning & Growth Section: implement a knowledge repository with categories (best practices, case studies, playbooks, personal notes), searchable entries, and per-entry rich text (basic formatting) and attachments as links.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "10️⃣ Learning & Growth Section\nStore best practices\nCase studies\nPlaybooks for scaling brands\nMy personal notes"
+        ]
+      },
+      "acceptanceCriteria": [
+        "User can create/edit/view knowledge entries by category.",
+        "User can search entries by title and body text.",
+        "Entries persist and are scoped by access permissions (RBAC)."
+      ]
+    },
+    {
+      "id": "REQ-14",
+      "text": "Create and commit project documentation describing (a) system architecture, (b) UI flow, (c) Motoko data model/storage layout, and (d) an MVP roadmap with phases and clear scope boundaries aligned to the requested modules.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Please design the full system architecture, UI flow, database structure, and MVP roadmap for this app."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Docs include a page/section for architecture (frontend/back-end responsibilities, data flow).",
+        "Docs include UI flow/navigation map and primary user journeys (e.g., add brand → add KPIs → dashboard → report).",
+        "Docs include a database/data model section listing the core entities and relationships.",
+        "Docs include an MVP roadmap phased into at least 2 stages (MVP now vs. later), explicitly calling out deferred items (e.g., live API integrations, PPT export)."
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "text": "Apply a cohesive, clean visual theme (not blue/purple) across the app: define a neutral analytics-style palette (e.g., charcoal, off-white, sage/teal accent), consistent typography scale, and reusable layouts for tables, metrics cards, and charts.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Technical Requirements:\nSimple, clean UI\nMobile-friendly"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All main pages share consistent spacing, typography, and component styling.",
+        "Theme is applied consistently to navigation, headings, cards, tables, and empty states.",
+        "Design remains accessible (reasonable contrast, readable text on mobile)."
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must remain a single Motoko actor (all logic in backend/main.mo).",
+    "Do not create or modify backend/migration.mo unless an upgrade/migration is required later.",
+    "Do not edit frontend immutable paths: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui (compose instead).",
+    "Authentication must use Internet Identity only (no third-party auth providers).",
+    "No external databases; persist data in canister stable storage."
+  ],
+  "nonGoals": [
+    "Implement live API integrations for Meta Ads, Google Ads, Shopify, or logistics providers in MVP (provide manual entry/import-friendly structures instead).",
+    "Implement true AI/LLM-powered recommendations (use rule-based heuristics only).",
+    "Real-time collaboration/chat, push notifications, email/SMS reminders.",
+    "PPT export in MVP (PDF export only)."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [
+      "Build a centralized growth management dashboard to manage and optimize multiple D2C brands across performance, marketing, CRO, product, operations, reporting, tasks, and knowledge management."
+    ],
+    "goalsToRemove": [],
+    "preferencesToAdd": [
+      "Prefer a simple, clean, mobile-friendly UI with secure login and role-based access."
+    ],
+    "preferencesToRemove": [],
+    "miscToAdd": [
+      "User is a Growth Lead at ShopDeck managing 15+ D2C brands; responsibilities include ads optimization (Meta/Google), conversion optimization, product/category management, shipping/ops tracking, and reporting."
+    ],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

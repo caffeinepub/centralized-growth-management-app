@@ -1,0 +1,206 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Build a centralized, cloud-based Growth Management App (personal Growth & Business Dashboard) for managing and optimizing 15+ D2C brands, covering performance KPIs, ads tracking, CRO, product/category, ops/shipping, AI recommendations, reporting, tasks, and a knowledge hub with secure role-based access and key API integrations.",
+  "architectural_notes": [
+    "Cloud-based, mobile-friendly dashboard with a simple/clean UI.",
+    "Secure authentication with role-based access control.",
+    "Planned third-party API integrations: Meta Ads, Google Ads, Shopify, and logistics providers (where possible)."
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-implement-secure-login-using-internet-identity-and-gate-all-app-pages-behind-authentication",
+      "title": "Implement secure login using Internet Identity and gate all app pages behind authentication.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-role-based-access-control-rbac-with-at-least-three-roles-admin-editor-viewer-and-a-basic-ui-for-admins-to-assign-roles-to-principals",
+      "title": "Implement role-based access control (RBAC) with at least three roles (Admin, Editor, Viewer) and a basic UI for Admins to assign roles to principals.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-the-mvp-information-architecture-and-ui-navigation-a-responsive-app-shell-with-sidebar-desktop-bottom-navigation-or-drawer-mobile-and-routes-for-brands-dashboard-marketing-cro-products-operations-tasks-reports-knowledge-and-settings",
+      "title": "Create the MVP information architecture and UI navigation: a responsive app shell with sidebar (desktop) / bottom navigation or drawer (mobile) and routes for Brands, Dashboard, Marketing, CRO, Products, Operations, Tasks, Reports, Knowledge, and Settings.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-brand-management-implement-crud-for-brand-profiles-including-key-fields-for-products-pricing-margins-suppliers-ad-budget-and-weekly-monthly-goals-with-list-detail-pages",
+      "title": "Brand Management: implement CRUD for brand profiles, including key fields for products/pricing/margins/suppliers/ad budget and weekly/monthly goals, with list + detail pages.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-performance-dashboard-provide-a-per-brand-and-cross-brand-dashboard-showing-kpis-revenue-profit-roas-cac-conversion-rate-aov-return-rate-shipping-cost-with-time-series-charts-and-basic-trends-over-selectable-periods-weekly-monthly",
+      "title": "Performance Dashboard: provide a per-brand and cross-brand dashboard showing KPIs (Revenue, Profit, ROAS, CAC, Conversion rate, AOV, Return rate, Shipping cost) with time-series charts and basic trends over selectable periods (weekly/monthly).",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-marketing-manager-mvp-implement-a-module-to-manually-log-and-review-meta-google-campaign-performance-campaign-name-platform-spend-revenue-roas-dates-compare-campaigns-flag-underperformers-based-on-configurable-thresholds-and-store-associated-creatives-copies-as-text-entries-and-file-links",
+      "title": "Marketing Manager (MVP): implement a module to manually log and review Meta/Google campaign performance (campaign name, platform, spend, revenue, ROAS, dates), compare campaigns, flag underperformers based on configurable thresholds, and store associated creatives/copies as text entries and file links.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-website-cro-module-mvp-implement-a-website-optimization-checklist-per-brand-an-a-b-test-tracker-hypothesis-variants-dates-result-and-a-ux-feedback-notes-log",
+      "title": "Website & CRO Module (MVP): implement a website optimization checklist per brand, an A/B test tracker (hypothesis, variants, dates, result), and a UX feedback notes log.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-product-category-manager-mvp-implement-sku-tracking-per-brand-sku-category-price-cost-margin-inventory-identify-best-low-performing-skus-from-kpi-inputs-and-trigger-inventory-alerts-using-configurable-thresholds",
+      "title": "Product & Category Manager (MVP): implement SKU tracking per brand (SKU, category, price, cost, margin, inventory), identify best/low-performing SKUs from KPI inputs, and trigger inventory alerts using configurable thresholds.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-operations-shipping-mvp-implement-tracking-for-shipping-partners-delivery-times-rto-rate-cost-per-shipment-and-an-ops-issues-log-per-brand",
+      "title": "Operations & Shipping (MVP): implement tracking for shipping partners, delivery times, RTO rate, cost per shipment, and an ops issues log per brand.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-decision-strategy-assistant-mvp-non-llm-generate-rule-based-recommendations-and-a-weekly-action-plan-using-the-app-s-stored-kpi-thresholds-and-heuristics-e-g-flag-low-roas-high-cac-low-conversion-rate-with-explanations-and-links-to-the-relevant-underlying-data",
+      "title": "Decision & Strategy Assistant (MVP, non-LLM): generate rule-based recommendations and a weekly action plan using the app’s stored KPI thresholds and heuristics (e.g., flag low ROAS, high CAC, low conversion rate) with explanations and links to the relevant underlying data.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-reports-presentations-mvp-implement-weekly-and-monthly-report-generation-per-brand-and-cross-brand-overview-with-client-friendly-layouts-and-export-to-pdf-from-the-frontend",
+      "title": "Reports & Presentations (MVP): implement weekly and monthly report generation per brand and cross-brand overview, with client-friendly layouts and export to PDF from the frontend.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-task-workflow-manager-implement-daily-to-do-list-with-priority-tagging-due-dates-reminders-in-app-and-collaboration-notes-attached-to-brands-or-tasks",
+      "title": "Task & Workflow Manager: implement daily to-do list with priority tagging, due dates, reminders (in-app), and collaboration notes attached to brands or tasks.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-learning-growth-section-implement-a-knowledge-repository-with-categories-best-practices-case-studies-playbooks-personal-notes-searchable-entries-and-per-entry-rich-text-basic-formatting-and-attachments-as-links",
+      "title": "Learning & Growth Section: implement a knowledge repository with categories (best practices, case studies, playbooks, personal notes), searchable entries, and per-entry rich text (basic formatting) and attachments as links.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-cohesive-clean-visual-theme-not-blue-purple-across-the-app-define-a-neutral-analytics-style-palette-e-g-charcoal-off-white-sage-teal-accent-consistent-typography-scale-and-reusable-layouts-for-tables-metrics-cards-and-charts",
+      "title": "Apply a cohesive, clean visual theme (not blue/purple) across the app: define a neutral analytics-style palette (e.g., charcoal, off-white, sage/teal accent), consistent typography scale, and reusable layouts for tables, metrics cards, and charts.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Brand Management: create brand profiles with products, pricing, margins, suppliers, ad budgets, and weekly/monthly goals",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Performance Dashboard: KPI tracking (revenue, profit, ROAS, CAC, CVR, AOV, return rate, shipping cost) with charts/trends",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Marketing Manager: Meta & Google Ads tracking, campaign comparisons, budget allocation suggestions, underperformance alerts, creative/copy library",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Website & CRO Module: optimization checklist, conversion suggestions, A/B test tracker, UX feedback notes",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Product & Category Manager: SKU performance, inventory alerts, pricing optimization suggestions, profitability analysis",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Operations & Shipping: delivery time tracking, RTO rate, shipping partners, cost per shipment, ops issues log",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Decision & Strategy Assistant: AI-powered recommendations and weekly action plans across ads/pricing/CRO",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Reports & Presentations: auto-generate weekly/monthly reports and client presentations with PDF/PPT export",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Task & Workflow Manager: daily to-do list, priority tags, follow-up reminders, team collaboration notes",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Learning & Growth Section: best practices, case studies, playbooks, and personal notes repository",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Platform requirements: simple clean UI, mobile-friendly, cloud-based, secure login, role-based access, and integrations (Ads, Shopify, logistics APIs)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-25",
+      "summary": "Create and commit project documentation describing (a) system architecture, (b) UI flow, (c) Motoko data model/storage layout, and (d) an MVP roadmap with phases and clear scope boundaries aligned to the requested modules.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Centralized Growth Management App",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

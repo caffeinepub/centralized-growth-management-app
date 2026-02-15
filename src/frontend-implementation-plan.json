@@ -1,0 +1,590 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Centralized Growth Management App (Frontend MVP)",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Gate the entire app behind Internet Identity login with a dedicated sign-in screen, sign-out, and first-login profile setup.",
+      "acceptanceCriteria": [
+        "Unauthenticated users are redirected to a sign-in screen and cannot access app pages.",
+        "Authenticated users can sign out.",
+        "User-facing text is in English."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the root app component that wraps all authenticated routes with an AuthGate and routes unauthenticated users to a sign-in screen. Use the selected \"authorization\" component guidance for Internet Identity gating and cache clearing; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/AuthGate.tsx",
+          "operation": "create",
+          "description": "Add an authentication gate that uses the existing immutable useInternetIdentity hook to decide whether to render app content or the sign-in screen; clear React Query cache on logout per the selected \"authorization\" component guidance. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/SignInScreen.tsx",
+          "operation": "create",
+          "description": "Create a simple, clean sign-in screen with an Internet Identity login button and basic error handling. Use the selected \"authorization\" component's login/logout UX recommendations; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useCurrentUserProfile.ts",
+          "operation": "create",
+          "description": "Create a React Query hook to fetch the current user's profile via the actor and avoid profile-setup modal flash as described by the selected \"authorization\" component. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/ProfileSetupModal.tsx",
+          "operation": "create",
+          "description": "Add a first-login profile setup modal that prompts for a display name when getCallerUserProfile returns null, and saves via saveCallerUserProfile. Follow the selected \"authorization\" component's profile setup guidance; verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Implement frontend RBAC (Admin/Editor/Viewer) with restricted UI and an Admin role-assignment screen for principals.",
+      "acceptanceCriteria": [
+        "Backend enforces permissions for all write operations (e.g., create/update/delete).",
+        "Frontend hides/disabled restricted actions based on role.",
+        "Admin can assign/change a user’s role and changes take effect without redeploy."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useUserRole.ts",
+          "operation": "create",
+          "description": "Create a hook that reads the caller role from the backend actor and maps it to app roles (Admin/Editor/Viewer) for UI gating. Use the selected \"authorization\" component's access-control UI guidance; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/RequireRole.tsx",
+          "operation": "create",
+          "description": "Create a small wrapper component to show children only if the user meets a required role; otherwise render an access-denied message/screen. Use the selected \"authorization\" component recommendation for an AccessDeniedScreen; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/settings/AccessControlPage.tsx",
+          "operation": "create",
+          "description": "Implement an Admin-only UI to assign roles to a principal (paste principal text, pick role Admin/Editor/Viewer, submit to backend). Ensure role changes reflect immediately by invalidating role queries. Use the selected \"authorization\" component guidance; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/SettingsPage.tsx",
+          "operation": "create",
+          "description": "Create Settings landing page that includes navigation to Access Control (admin-only) and other settings used by modules (e.g., thresholds). Use RBAC wrappers to hide/disable restricted areas. Verify the selected \"authorization\" component usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire Settings routes including an admin-only Access Control route using RequireRole, and ensure restricted actions across pages read from the role hook. Verify the selected \"authorization\" component usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Create a responsive app shell and navigation with routes for all MVP sections and clear empty states.",
+      "acceptanceCriteria": [
+        "All listed sections are reachable via navigation.",
+        "Layout is mobile-friendly and usable on narrow screens.",
+        "Each section has a clear empty state when no data exists."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/layout/AppShell.tsx",
+          "operation": "create",
+          "description": "Implement a responsive shell with a desktop sidebar and a mobile bottom navigation (or drawer) that links to Dashboard, Brands, Marketing, CRO, Products, Operations, Tasks, Reports, Knowledge, and Settings. Compose (do not modify) existing shadcn/ui components where appropriate (e.g., buttons, dialogs, sheets); verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/layout/NavItems.ts",
+          "operation": "create",
+          "description": "Centralize navigation item definitions (labels, paths, icons if used) to ensure all sections are reachable and consistent across sidebar and mobile nav."
+        },
+        {
+          "path": "frontend/src/pages/DashboardPage.tsx",
+          "operation": "create",
+          "description": "Create the Dashboard route page with a clear empty state when no brands/KPI data exists."
+        },
+        {
+          "path": "frontend/src/pages/BrandsPage.tsx",
+          "operation": "create",
+          "description": "Create the Brands route page shell (list area + empty state); Brand CRUD wiring is handled in REQ-4."
+        },
+        {
+          "path": "frontend/src/pages/MarketingPage.tsx",
+          "operation": "create",
+          "description": "Create the Marketing route page shell with empty state; campaign functionality is handled in REQ-6."
+        },
+        {
+          "path": "frontend/src/pages/CROPage.tsx",
+          "operation": "create",
+          "description": "Create the CRO route page shell with empty state; checklist/A-B/notes are handled in REQ-7."
+        },
+        {
+          "path": "frontend/src/pages/ProductsPage.tsx",
+          "operation": "create",
+          "description": "Create the Products route page shell with empty state; SKU management is handled in REQ-8."
+        },
+        {
+          "path": "frontend/src/pages/OperationsPage.tsx",
+          "operation": "create",
+          "description": "Create the Operations route page shell with empty state; ops tracking is handled in REQ-9."
+        },
+        {
+          "path": "frontend/src/pages/TasksPage.tsx",
+          "operation": "create",
+          "description": "Create the Tasks route page shell with empty state; task manager is handled in REQ-12."
+        },
+        {
+          "path": "frontend/src/pages/ReportsPage.tsx",
+          "operation": "create",
+          "description": "Create the Reports route page shell with empty state; report generation/export is handled in REQ-11."
+        },
+        {
+          "path": "frontend/src/pages/KnowledgePage.tsx",
+          "operation": "create",
+          "description": "Create the Knowledge route page shell with empty state; repository functionality is handled in REQ-13."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Define and wire routes for all sections and wrap them with AppShell. Ensure navigation links exist for each route and that unauthenticated users never reach them (AuthGate integration from REQ-1)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Implement Brand Management UI: list + detail pages with create/edit/archive-delete actions gated by role.",
+      "acceptanceCriteria": [
+        "User can create, view, edit, and archive/delete a brand (subject to RBAC).",
+        "Brand detail shows stored key details and goals.",
+        "Data persists across refresh/reload."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/brands/useBrands.ts",
+          "operation": "create",
+          "description": "Create React Query hooks for listing brand names and fetching brand profiles via the backend actor; include loading/error and empty states."
+        },
+        {
+          "path": "frontend/src/hooks/brands/useBrandMutations.ts",
+          "operation": "create",
+          "description": "Create mutations for creating, updating, and deleting brands; invalidate relevant queries after successful writes and handle authorization errors gracefully."
+        },
+        {
+          "path": "frontend/src/pages/brands/BrandListPage.tsx",
+          "operation": "create",
+          "description": "Implement a brand list view with create-brand action (Editor/Admin), search/filter, and an empty state prompting users to add their first brand. Compose (do not modify) existing shadcn/ui components for table/forms where appropriate; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/brands/BrandDetailPage.tsx",
+          "operation": "create",
+          "description": "Implement brand detail view showing profile fields (products/pricing/margins/suppliers/ad budget and weekly/monthly goals) with edit and delete/archive actions gated by role. Compose (do not modify) shadcn/ui form controls where appropriate; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/brands/BrandProfileForm.tsx",
+          "operation": "create",
+          "description": "Create a reusable form component for editing BrandProfile fields including suppliers, products/pricing, margin, ad budget, and goals, with validation and a clear empty state for nested lists."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire nested brand routes (e.g., brand list + brand detail) under the Brands section and ensure navigation reaches both list and detail pages."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Build per-brand and cross-brand KPI dashboard UI with weekly/monthly toggles, charts, trends, and missing-data guidance.",
+      "acceptanceCriteria": [
+        "User can select a brand or view an aggregated overview across brands.",
+        "At least one chart per KPI category renders from stored data.",
+        "User can switch between weekly and monthly views.",
+        "If data is missing, UI explains what to add and where."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/kpi/KpiCards.tsx",
+          "operation": "create",
+          "description": "Create reusable KPI metric cards (Revenue, Profit, ROAS, CAC, Conversion rate, AOV, Return rate, Shipping cost) with basic trend indicators and consistent styling."
+        },
+        {
+          "path": "frontend/src/components/charts/SimpleTimeSeriesChart.tsx",
+          "operation": "create",
+          "description": "Implement lightweight time-series chart rendering (e.g., SVG-based) that can visualize KPI values for weekly vs monthly views without requiring external integrations."
+        },
+        {
+          "path": "frontend/src/utils/kpiAggregation.ts",
+          "operation": "create",
+          "description": "Add utilities to compute cross-brand aggregates and safe handling of missing/partial KPI data for empty-state guidance."
+        },
+        {
+          "path": "frontend/src/pages/DashboardPage.tsx",
+          "operation": "modify",
+          "description": "Implement brand selector (single brand vs all brands), weekly/monthly toggle, KPI cards, and charts. Add explanatory empty states pointing users to Brands (to enter goals/KPIs) and Marketing/Products/Operations (to add supporting data)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Create Marketing Manager UI for manual campaign logging, sortable comparisons, and underperformer highlighting using configurable thresholds.",
+      "acceptanceCriteria": [
+        "User can create/edit campaign performance entries tied to a brand.",
+        "User can compare campaigns in a table with sortable columns (at minimum: spend, revenue, ROAS).",
+        "Underperforming campaigns are highlighted when they breach thresholds set in Settings.",
+        "Creatives/copies can be stored as structured text (e.g., headline/body) plus optional URL references."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/marketing/useCampaigns.ts",
+          "operation": "create",
+          "description": "Create React Query hooks for listing, viewing, and sorting campaigns using backend actor capabilities; normalize loading/error states and handle authorization failures."
+        },
+        {
+          "path": "frontend/src/hooks/marketing/useCampaignMutations.ts",
+          "operation": "create",
+          "description": "Create mutations for campaign create/update/delete; invalidate campaign and dashboard queries after writes."
+        },
+        {
+          "path": "frontend/src/components/marketing/CampaignForm.tsx",
+          "operation": "create",
+          "description": "Create a form for campaign entries including campaign name, platform, spend, revenue, ROAS, dates, and structured creative/copy text plus optional URL links. Compose (do not modify) shadcn/ui inputs/dialogs where appropriate; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/marketing/CampaignComparisonTable.tsx",
+          "operation": "create",
+          "description": "Create a sortable comparison table (spend, revenue, ROAS at minimum) and visually highlight underperformers based on thresholds from Settings. Compose (do not modify) shadcn/ui table components where appropriate; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/settings/useThresholdSettings.ts",
+          "operation": "create",
+          "description": "Implement storage and retrieval of configurable marketing thresholds (e.g., min ROAS) for underperformer detection; persist client-side to survive reload (e.g., localStorage) and keep UI consistent."
+        },
+        {
+          "path": "frontend/src/pages/MarketingPage.tsx",
+          "operation": "modify",
+          "description": "Implement the Marketing Manager page that ties campaigns to a selected brand, provides create/edit flows, renders the comparison table, and applies underperformer highlighting using configured thresholds."
+        },
+        {
+          "path": "frontend/src/pages/SettingsPage.tsx",
+          "operation": "modify",
+          "description": "Add a Settings section for marketing thresholds used to highlight underperforming campaigns, with clear descriptions of how thresholds affect highlighting."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Implement CRO tools per brand: optimization checklist, A/B test tracker, and searchable UX feedback notes log.",
+      "acceptanceCriteria": [
+        "Checklist items can be created, checked/unchecked, and filtered by status.",
+        "A/B tests can be created and tracked through statuses (planned/running/completed).",
+        "UX feedback notes support timestamps and are searchable within a brand."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/cro/useCroStorage.ts",
+          "operation": "create",
+          "description": "Create a per-brand CRO storage layer persisted client-side (e.g., localStorage) for checklist items, A/B tests, and UX notes; include search/filter helpers."
+        },
+        {
+          "path": "frontend/src/components/cro/ChecklistPanel.tsx",
+          "operation": "create",
+          "description": "Implement checklist UI with create, check/uncheck, and status filtering, including clear empty states."
+        },
+        {
+          "path": "frontend/src/components/cro/AbTestTracker.tsx",
+          "operation": "create",
+          "description": "Implement A/B test tracker UI with hypothesis, variants, dates, and status (planned/running/completed), plus create/edit flows."
+        },
+        {
+          "path": "frontend/src/components/cro/UxNotesLog.tsx",
+          "operation": "create",
+          "description": "Implement UX feedback notes with timestamps and brand-scoped search by text."
+        },
+        {
+          "path": "frontend/src/pages/CROPage.tsx",
+          "operation": "modify",
+          "description": "Wire brand selection and render checklist, A/B test tracker, and UX notes panels, including empty-state guidance."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Provide SKU tracking per brand with top/low performers view and inventory alert indicators using configurable thresholds.",
+      "acceptanceCriteria": [
+        "User can create/edit SKU records per brand.",
+        "UI can display a “Top / Low performers” view based on stored sales/profitability fields.",
+        "Inventory alert state is shown when inventory <= threshold and can be filtered."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/products/useProductThresholdSettings.ts",
+          "operation": "create",
+          "description": "Implement configurable product/inventory thresholds (e.g., low inventory threshold) persisted client-side for alerting and filtering."
+        },
+        {
+          "path": "frontend/src/hooks/products/useInventoryLocalState.ts",
+          "operation": "create",
+          "description": "Add client-side inventory tracking keyed by brand + SKU (since inventory is not part of the current backend types) and expose helpers to compute alert state and filters."
+        },
+        {
+          "path": "frontend/src/components/products/SkuEditor.tsx",
+          "operation": "create",
+          "description": "Create UI to create/edit SKU records per brand by editing the brand's Product list (name, sku, category, price, cost, margin) and saving via brand update. Compose (do not modify) shadcn/ui form components where appropriate; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/products/TopLowPerformers.tsx",
+          "operation": "create",
+          "description": "Implement a view that ranks products into Top/Low performers using available stored fields (e.g., margin/profit proxy) and displays results with clear explanations."
+        },
+        {
+          "path": "frontend/src/components/products/InventoryAlerts.tsx",
+          "operation": "create",
+          "description": "Implement inventory alert list/filtering based on client-side inventory state and configured thresholds, with an empty state and guidance."
+        },
+        {
+          "path": "frontend/src/pages/ProductsPage.tsx",
+          "operation": "modify",
+          "description": "Wire brand selection and render SKU editor, top/low performers, and inventory alerts; gate editing actions by role (Editor/Admin)."
+        },
+        {
+          "path": "frontend/src/pages/SettingsPage.tsx",
+          "operation": "modify",
+          "description": "Add settings UI for product/inventory thresholds that drive inventory alert highlighting and filtering."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Add Operations & Shipping UI per brand: shipping metrics trends/summary and an ops issues log with status filtering.",
+      "acceptanceCriteria": [
+        "User can log shipping metrics per period and view trends/summary per brand.",
+        "Ops issues can be created, assigned a status, and filtered (open/closed).",
+        "Key metrics (delivery time, RTO, cost per shipment) appear on the brand’s operations page."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/operations/useOperationsStorage.ts",
+          "operation": "create",
+          "description": "Create client-side persisted storage (e.g., localStorage) for per-brand shipping metrics entries by period and ops issues with status."
+        },
+        {
+          "path": "frontend/src/components/operations/ShippingMetricsPanel.tsx",
+          "operation": "create",
+          "description": "Implement UI to log and display delivery time, RTO rate, shipping partner, and cost per shipment, including basic trend visualization and empty-state guidance."
+        },
+        {
+          "path": "frontend/src/components/operations/OpsIssuesLog.tsx",
+          "operation": "create",
+          "description": "Implement ops issues log UI with create/edit, open/closed status, and filtering."
+        },
+        {
+          "path": "frontend/src/pages/OperationsPage.tsx",
+          "operation": "modify",
+          "description": "Wire brand selection and display key shipping metrics and issues log on the Operations page; gate write actions by role (Editor/Admin)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "summary": "Implement deterministic, rule-based recommendations and a saveable weekly action plan with explanations and links to underlying data.",
+      "acceptanceCriteria": [
+        "Recommendations are generated deterministically from configured rules (no external AI/LLM calls).",
+        "Each recommendation includes a reason (which KPI/threshold triggered it) and the brand/campaign/SKU it relates to.",
+        "Weekly action plan can be generated on demand and saved for later review."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/utils/recommendations/rules.ts",
+          "operation": "create",
+          "description": "Define deterministic recommendation rules based on stored KPI values and configurable thresholds (e.g., low ROAS, high CAC, low conversion rate), producing structured reasons and references to related entities."
+        },
+        {
+          "path": "frontend/src/hooks/assistant/useWeeklyActionPlan.ts",
+          "operation": "create",
+          "description": "Implement generation and client-side persistence (e.g., localStorage) for weekly action plans; support saving, listing, and re-opening prior plans."
+        },
+        {
+          "path": "frontend/src/components/assistant/RecommendationsPanel.tsx",
+          "operation": "create",
+          "description": "Create UI to render recommendations with explanation text and deep links to relevant sections (brand detail, marketing campaigns, products, operations) to inspect underlying data."
+        },
+        {
+          "path": "frontend/src/pages/DashboardPage.tsx",
+          "operation": "modify",
+          "description": "Add a Decision & Strategy section to the Dashboard that generates recommendations on demand and allows generating/saving a weekly action plan."
+        }
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "summary": "Create client-friendly weekly/monthly report views with frontend PDF export via print-to-PDF.",
+      "acceptanceCriteria": [
+        "User can generate a Weekly and Monthly report view with key KPIs, charts, and notable changes.",
+        "User can export the report to a PDF file.",
+        "Exported PDF contains readable typography and includes date range + brand(s)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/reports/ReportViewer.tsx",
+          "operation": "create",
+          "description": "Implement a report renderer that supports weekly/monthly views, includes KPI cards and charts, and shows notable changes (derived from available stored data)."
+        },
+        {
+          "path": "frontend/src/components/reports/ReportExportButton.tsx",
+          "operation": "create",
+          "description": "Add an export control that triggers a print-optimized report flow (e.g., opening a print view and calling window.print) to enable user PDF export from the browser."
+        },
+        {
+          "path": "frontend/src/pages/ReportsPage.tsx",
+          "operation": "modify",
+          "description": "Implement report generation UI: select brand vs all brands, choose weekly/monthly date range, render the report viewer, and provide a PDF export button."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Add global styles including print styles (@media print) to ensure exported PDFs have readable typography, sensible margins, and hide non-report UI (navigation/chrome) during printing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "summary": "Implement task manager UI with priority, due dates, in-app reminders, filtering, and collaboration notes attached to tasks/brands.",
+      "acceptanceCriteria": [
+        "User can create/edit/complete tasks and filter by brand, status, due date, and priority.",
+        "Tasks support freeform notes and optional association to a brand.",
+        "Reminders appear as in-app indicators for due/overdue tasks."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/tasks/useTasks.ts",
+          "operation": "create",
+          "description": "Create React Query hooks for listing tasks and retrieving tasks by brand/upcoming using backend actor capabilities; normalize loading/error states."
+        },
+        {
+          "path": "frontend/src/hooks/tasks/useTaskMutations.ts",
+          "operation": "create",
+          "description": "Create mutations for create/update/delete tasks; invalidate tasks queries after writes and handle authorization errors gracefully."
+        },
+        {
+          "path": "frontend/src/hooks/tasks/useTaskNotesLocal.ts",
+          "operation": "create",
+          "description": "Implement client-side persisted collaboration notes per task (since notes/reminders are not present in the current backend types) and expose helpers for editing and displaying notes."
+        },
+        {
+          "path": "frontend/src/components/tasks/TaskEditor.tsx",
+          "operation": "create",
+          "description": "Create a task editor UI that supports description, optional brand association, priority, due date, status transitions, and notes. Compose (do not modify) shadcn/ui dialogs/inputs where appropriate; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/tasks/TaskFilters.tsx",
+          "operation": "create",
+          "description": "Implement filtering UI for brand, status, due date, and priority; include a quick view for due/overdue reminders as in-app indicators."
+        },
+        {
+          "path": "frontend/src/pages/TasksPage.tsx",
+          "operation": "modify",
+          "description": "Render task list, filters, create/edit flows, completion actions, and due/overdue reminders; gate write actions by role (Editor/Admin)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "summary": "Build a knowledge repository UI with categories, search, rich text (basic formatting), and link attachments.",
+      "acceptanceCriteria": [
+        "User can create/edit/view knowledge entries by category.",
+        "User can search entries by title and body text.",
+        "Entries persist and are scoped by access permissions (RBAC)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/knowledge/useKnowledgeStorage.ts",
+          "operation": "create",
+          "description": "Implement client-side persisted storage for knowledge entries with categories (best practices, case studies, playbooks, personal notes), indexing for search, and basic access scoping based on the current user role."
+        },
+        {
+          "path": "frontend/src/components/knowledge/KnowledgeEditor.tsx",
+          "operation": "create",
+          "description": "Create an editor UI that supports title, category, basic rich text formatting (limited set), and attachment links (URLs). Gate edit/create actions by role (Editor/Admin)."
+        },
+        {
+          "path": "frontend/src/components/knowledge/KnowledgeSearch.tsx",
+          "operation": "create",
+          "description": "Implement search UI that filters entries by title/body text, plus category filters and an empty state."
+        },
+        {
+          "path": "frontend/src/pages/KnowledgePage.tsx",
+          "operation": "modify",
+          "description": "Render knowledge list/search, entry view, and create/edit flows, using RBAC to hide/disable restricted actions and to scope what is visible."
+        }
+      ]
+    },
+    {
+      "id": "REQ-14",
+      "summary": "Add in-repo documentation covering architecture, UI flow, data model overview, and an MVP roadmap with phased scope boundaries.",
+      "acceptanceCriteria": [
+        "Docs include a page/section for architecture (frontend/back-end responsibilities, data flow).",
+        "Docs include UI flow/navigation map and primary user journeys (e.g., add brand → add KPIs → dashboard → report).",
+        "Docs include a database/data model section listing the core entities and relationships.",
+        "Docs include an MVP roadmap phased into at least 2 stages (MVP now vs. later), explicitly calling out deferred items (e.g., live API integrations, PPT export)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/docs/architecture.md",
+          "operation": "create",
+          "description": "Document high-level system architecture focused on frontend responsibilities, backend interaction patterns, data flow, and security boundaries (authentication/RBAC)."
+        },
+        {
+          "path": "frontend/docs/ui-flow.md",
+          "operation": "create",
+          "description": "Document UI flow/navigation map and primary user journeys across modules (brand setup, KPI review, marketing logging, reporting, tasks)."
+        },
+        {
+          "path": "frontend/docs/data-model.md",
+          "operation": "create",
+          "description": "Document the core entity model as consumed by the frontend (brands, KPIs, campaigns, tasks, and client-side persisted module data), including relationships and where each is stored."
+        },
+        {
+          "path": "frontend/docs/roadmap.md",
+          "operation": "create",
+          "description": "Document MVP roadmap with at least two phases and explicit deferred scope items (e.g., live integrations, PPT export, realtime features) aligned to requested modules."
+        }
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "summary": "Apply a cohesive, neutral analytics-style visual theme (no blue/purple) with consistent typography, spacing, and reusable UI patterns for cards/tables/charts.",
+      "acceptanceCriteria": [
+        "All main pages share consistent spacing, typography, and component styling.",
+        "Theme is applied consistently to navigation, headings, cards, tables, and empty states.",
+        "Design remains accessible (reasonable contrast, readable text on mobile)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Define global design tokens (CSS variables) for a neutral palette (charcoal/off-white) with a sage/teal accent (non-blue/purple), plus typography scale defaults and accessible contrast."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Adjust Tailwind theme extension (if needed) to align with the new neutral palette tokens and ensure consistent styling for cards, tables, navigation, and chart colors."
+        },
+        {
+          "path": "frontend/src/components/ui-patterns/EmptyState.tsx",
+          "operation": "create",
+          "description": "Create a reusable empty state component used across pages to keep messaging and layout consistent."
+        },
+        {
+          "path": "frontend/src/components/ui-patterns/PageHeader.tsx",
+          "operation": "create",
+          "description": "Create a reusable page header (title, description, actions) to standardize layout across modules."
+        },
+        {
+          "path": "frontend/src/components/ui-patterns/Card.tsx",
+          "operation": "create",
+          "description": "Create a reusable card wrapper for metrics panels and content sections to ensure consistent spacing and styling (compose with existing shadcn/ui primitives where appropriate; verify the component's usage instructions before implementing)."
+        },
+        {
+          "path": "frontend/src/components/layout/AppShell.tsx",
+          "operation": "modify",
+          "description": "Apply the theme consistently to navigation elements (sidebar/mobile nav), headings, and overall spacing to achieve a clean, mobile-friendly layout."
+        }
+      ]
+    }
+  ]
+}

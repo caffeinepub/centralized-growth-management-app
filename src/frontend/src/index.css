@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.5rem;
+        
+        /* Neutral charcoal/off-white palette with sage/teal accent */
+        --background: 0.98 0 0;
+        --foreground: 0.20 0 0;
+        --card: 1 0 0;
+        --card-foreground: 0.20 0 0;
+        --popover: 1 0 0;
+        --popover-foreground: 0.20 0 0;
+        
+        /* Sage/teal primary accent */
+        --primary: 0.55 0.08 165;
+        --primary-foreground: 0.98 0 0;
+        
+        --secondary: 0.94 0.01 165;
+        --secondary-foreground: 0.25 0 0;
+        --muted: 0.96 0 0;
+        --muted-foreground: 0.50 0 0;
+        --accent: 0.94 0.01 165;
+        --accent-foreground: 0.25 0 0;
+        --destructive: 0.55 0.20 25;
+        --destructive-foreground: 0.98 0 0;
+        --border: 0.90 0 0;
+        --input: 0.90 0 0;
+        --ring: 0.55 0.08 165;
+        
+        /* Chart colors - varied palette */
+        --chart-1: 0.55 0.08 165;
+        --chart-2: 0.60 0.12 280;
+        --chart-3: 0.65 0.15 45;
+        --chart-4: 0.50 0.10 200;
+        --chart-5: 0.58 0.14 320;
+        
+        --sidebar: 0.98 0 0;
+        --sidebar-foreground: 0.25 0 0;
+        --sidebar-primary: 0.55 0.08 165;
+        --sidebar-primary-foreground: 0.98 0 0;
+        --sidebar-accent: 0.94 0.01 165;
+        --sidebar-accent-foreground: 0.25 0 0;
+        --sidebar-border: 0.90 0 0;
+        --sidebar-ring: 0.55 0.08 165;
+    }
+
+    .dark {
+        --background: 0.15 0 0;
+        --foreground: 0.95 0 0;
+        --card: 0.18 0 0;
+        --card-foreground: 0.95 0 0;
+        --popover: 0.18 0 0;
+        --popover-foreground: 0.95 0 0;
+        
+        /* Brighter sage/teal for dark mode */
+        --primary: 0.70 0.10 165;
+        --primary-foreground: 0.15 0 0;
+        
+        --secondary: 0.25 0.01 165;
+        --secondary-foreground: 0.95 0 0;
+        --muted: 0.25 0 0;
+        --muted-foreground: 0.65 0 0;
+        --accent: 0.28 0.02 165;
+        --accent-foreground: 0.95 0 0;
+        --destructive: 0.60 0.22 25;
+        --destructive-foreground: 0.15 0 0;
+        --border: 0.30 0 0;
+        --input: 0.30 0 0;
+        --ring: 0.70 0.10 165;
+        
+        /* Chart colors for dark mode */
+        --chart-1: 0.70 0.10 165;
+        --chart-2: 0.65 0.14 280;
+        --chart-3: 0.70 0.18 45;
+        --chart-4: 0.60 0.12 200;
+        --chart-5: 0.68 0.16 320;
+        
+        --sidebar: 0.18 0 0;
+        --sidebar-foreground: 0.95 0 0;
+        --sidebar-primary: 0.70 0.10 165;
+        --sidebar-primary-foreground: 0.15 0 0;
+        --sidebar-accent: 0.25 0.01 165;
+        --sidebar-accent-foreground: 0.95 0 0;
+        --sidebar-border: 0.30 0 0;
+        --sidebar-ring: 0.70 0.10 165;
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-feature-settings: "rlig" 1, "calt" 1;
+    }
+}
+
+/* Print styles for PDF export */
+@media print {
+    body {
+        @apply bg-white text-black;
+    }
+    
+    header, nav, footer, button, .no-print {
+        display: none !important;
+    }
+    
+    main {
+        @apply p-0;
+    }
+    
+    @page {
+        margin: 2cm;
+    }
+}

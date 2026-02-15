@@ -1,0 +1,296 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-implement-secure-login-using-internet-identity-and-gate-all-app-pages-behind-authentication",
+      "featureTitle": "Implement secure login using Internet Identity and gate all app pages behind authentication.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/auth/AuthGate.tsx",
+        "frontend/src/components/auth/ProfileSetupModal.tsx",
+        "frontend/src/components/auth/SignInScreen.tsx",
+        "frontend/src/hooks/useCurrentUserProfile.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-role-based-access-control-rbac-with-at-least-three-roles-admin-editor-viewer-and-a-basic-ui-for-admins-to-assign-roles-to-principals",
+      "featureTitle": "Implement role-based access control (RBAC) with at least three roles (Admin, Editor, Viewer) and a basic UI for Admins to assign roles to principals.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/auth/RequireRole.tsx",
+        "frontend/src/hooks/useUserRole.ts",
+        "frontend/src/pages/SettingsPage.tsx",
+        "frontend/src/pages/settings/AccessControlPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-the-mvp-information-architecture-and-ui-navigation-a-responsive-app-shell-with-sidebar-desktop-bottom-navigation-or-drawer-mobile-and-routes-for-brands-dashboard-marketing-cro-products-operations-tasks-reports-knowledge-and-settings",
+      "featureTitle": "Create the MVP information architecture and UI navigation: a responsive app shell with sidebar (desktop) / bottom navigation or drawer (mobile) and routes for Brands, Dashboard, Marketing, CRO, Products, Operations, Tasks, Reports, Knowledge, and Settings.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/layout/AppShell.tsx",
+        "frontend/src/components/layout/NavItems.ts",
+        "frontend/src/pages/BrandsPage.tsx",
+        "frontend/src/pages/CROPage.tsx",
+        "frontend/src/pages/DashboardPage.tsx",
+        "frontend/src/pages/KnowledgePage.tsx",
+        "frontend/src/pages/MarketingPage.tsx",
+        "frontend/src/pages/OperationsPage.tsx",
+        "frontend/src/pages/ProductsPage.tsx",
+        "frontend/src/pages/ReportsPage.tsx",
+        "frontend/src/pages/TasksPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-brand-management-implement-crud-for-brand-profiles-including-key-fields-for-products-pricing-margins-suppliers-ad-budget-and-weekly-monthly-goals-with-list-detail-pages",
+      "featureTitle": "Brand Management: implement CRUD for brand profiles, including key fields for products/pricing/margins/suppliers/ad budget and weekly/monthly goals, with list + detail pages.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/brands/BrandDetailPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-performance-dashboard-provide-a-per-brand-and-cross-brand-dashboard-showing-kpis-revenue-profit-roas-cac-conversion-rate-aov-return-rate-shipping-cost-with-time-series-charts-and-basic-trends-over-selectable-periods-weekly-monthly",
+      "featureTitle": "Performance Dashboard: provide a per-brand and cross-brand dashboard showing KPIs (Revenue, Profit, ROAS, CAC, Conversion rate, AOV, Return rate, Shipping cost) with time-series charts and basic trends over selectable periods (weekly/monthly).",
+      "files": [
+        "frontend/src/pages/DashboardPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-marketing-manager-mvp-implement-a-module-to-manually-log-and-review-meta-google-campaign-performance-campaign-name-platform-spend-revenue-roas-dates-compare-campaigns-flag-underperformers-based-on-configurable-thresholds-and-store-associated-creatives-copies-as-text-entries-and-file-links",
+      "featureTitle": "Marketing Manager (MVP): implement a module to manually log and review Meta/Google campaign performance (campaign name, platform, spend, revenue, ROAS, dates), compare campaigns, flag underperformers based on configurable thresholds, and store associated creatives/copies as text entries and file links.",
+      "files": [
+        "frontend/src/pages/MarketingPage.tsx",
+        "frontend/src/pages/SettingsPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-website-cro-module-mvp-implement-a-website-optimization-checklist-per-brand-an-a-b-test-tracker-hypothesis-variants-dates-result-and-a-ux-feedback-notes-log",
+      "featureTitle": "Website & CRO Module (MVP): implement a website optimization checklist per brand, an A/B test tracker (hypothesis, variants, dates, result), and a UX feedback notes log.",
+      "files": [
+        "frontend/src/pages/CROPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-product-category-manager-mvp-implement-sku-tracking-per-brand-sku-category-price-cost-margin-inventory-identify-best-low-performing-skus-from-kpi-inputs-and-trigger-inventory-alerts-using-configurable-thresholds",
+      "featureTitle": "Product & Category Manager (MVP): implement SKU tracking per brand (SKU, category, price, cost, margin, inventory), identify best/low-performing SKUs from KPI inputs, and trigger inventory alerts using configurable thresholds.",
+      "files": [
+        "frontend/src/pages/ProductsPage.tsx",
+        "frontend/src/pages/SettingsPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-operations-shipping-mvp-implement-tracking-for-shipping-partners-delivery-times-rto-rate-cost-per-shipment-and-an-ops-issues-log-per-brand",
+      "featureTitle": "Operations & Shipping (MVP): implement tracking for shipping partners, delivery times, RTO rate, cost per shipment, and an ops issues log per brand.",
+      "files": [
+        "frontend/src/pages/OperationsPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-decision-strategy-assistant-mvp-non-llm-generate-rule-based-recommendations-and-a-weekly-action-plan-using-the-app-s-stored-kpi-thresholds-and-heuristics-e-g-flag-low-roas-high-cac-low-conversion-rate-with-explanations-and-links-to-the-relevant-underlying-data",
+      "featureTitle": "Decision & Strategy Assistant (MVP, non-LLM): generate rule-based recommendations and a weekly action plan using the app’s stored KPI thresholds and heuristics (e.g., flag low ROAS, high CAC, low conversion rate) with explanations and links to the relevant underlying data.",
+      "files": [
+        "frontend/src/pages/DashboardPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-10"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-reports-presentations-mvp-implement-weekly-and-monthly-report-generation-per-brand-and-cross-brand-overview-with-client-friendly-layouts-and-export-to-pdf-from-the-frontend",
+      "featureTitle": "Reports & Presentations (MVP): implement weekly and monthly report generation per brand and cross-brand overview, with client-friendly layouts and export to PDF from the frontend.",
+      "files": [
+        "frontend/src/index.css",
+        "frontend/src/pages/ReportsPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-11"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-task-workflow-manager-implement-daily-to-do-list-with-priority-tagging-due-dates-reminders-in-app-and-collaboration-notes-attached-to-brands-or-tasks",
+      "featureTitle": "Task & Workflow Manager: implement daily to-do list with priority tagging, due dates, reminders (in-app), and collaboration notes attached to brands or tasks.",
+      "files": [
+        "frontend/src/pages/TasksPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-12"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-learning-growth-section-implement-a-knowledge-repository-with-categories-best-practices-case-studies-playbooks-personal-notes-searchable-entries-and-per-entry-rich-text-basic-formatting-and-attachments-as-links",
+      "featureTitle": "Learning & Growth Section: implement a knowledge repository with categories (best practices, case studies, playbooks, personal notes), searchable entries, and per-entry rich text (basic formatting) and attachments as links.",
+      "files": [
+        "frontend/src/pages/KnowledgePage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-13"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-apply-a-cohesive-clean-visual-theme-not-blue-purple-across-the-app-define-a-neutral-analytics-style-palette-e-g-charcoal-off-white-sage-teal-accent-consistent-typography-scale-and-reusable-layouts-for-tables-metrics-cards-and-charts",
+      "featureTitle": "Apply a cohesive, clean visual theme (not blue/purple) across the app: define a neutral analytics-style palette (e.g., charcoal, off-white, sage/teal accent), consistent typography scale, and reusable layouts for tables, metrics cards, and charts.",
+      "files": [
+        "frontend/src/components/layout/AppShell.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-15"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
